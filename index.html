@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore the Solar System through an interactive 3D learning experience for students.">
+  <title>Solar Explorer | Discover Our Solar System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Solar Explorer home">
+      <span class="brand-mark">✦</span>
+      <span>SOLAR<span class="brand-light">EXPLORER</span></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#explore">Explore</a>
+      <a href="#planets">Planets</a>
+      <a href="#quiz">Knowledge quiz</a>
+    </nav>
+    <a class="top-cta" href="#explore">Start exploring <span>↗</span></a>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> AN INTERACTIVE SPACE CLASSROOM</p>
+        <h1>Our solar system.<br><span>Your universe</span><span class="period">.</span></h1>
+        <p class="hero-text">Travel from the Sun to the edge of our planetary neighbourhood. Explore worlds, discover amazing facts and test what you know.</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#explore">Explore the planets <span>→</span></a>
+          <a class="text-link" href="#quiz">Take a quick quiz</a>
+        </div>
+        <div class="hero-note"><span class="note-icon">✧</span> Made for curious minds and future explorers</div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-orbit orbit-one"></div>
+        <div class="hero-orbit orbit-two"></div>
+        <div class="hero-orbit orbit-three"></div>
+        <div class="hero-sun"></div>
+        <div class="hero-planet planet-blue"></div>
+        <div class="hero-planet planet-ring"></div>
+        <div class="hero-planet planet-red"></div>
+        <div class="hero-star star-a">✦</div><div class="hero-star star-b">✧</div><div class="hero-star star-c">·</div>
+        <div class="hero-caption">8 PLANETS <span>•</span> ONE STAR <span>•</span> ENDLESS DISCOVERIES</div>
+      </div>
+    </section>
+
+    <section class="explore-section section-wrap" id="explore">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">THE INTERACTIVE MODEL</p>
+          <h2>Meet our planetary neighbours</h2>
+          <p class="section-subtitle">Select a planet to discover its story. Drag to rotate, scroll to zoom, and use the controls to change orbital speed.</p>
+        </div>
+        <div class="model-tag"><span class="live-dot"></span> 3D SOLAR SYSTEM</div>
+      </div>
+
+      <div class="explorer-layout">
+        <div class="space-panel">
+          <div id="solar-scene" class="solar-scene" aria-label="Interactive 3D model of the solar system">
+            <div class="scene-loading" id="scene-loading">Preparing your universe…</div>
+            <div class="scene-hint">DRAG TO ROTATE <span>•</span> SCROLL TO ZOOM <span>•</span> SELECT A PLANET</div>
+          </div>
+          <div class="scene-controls">
+            <button id="pause-btn" class="control-btn" type="button">Ⅱ <span>Pause orbits</span></button>
+            <label class="speed-control" for="speed-range"><span>ORBIT SPEED</span><input id="speed-range" type="range" min="0" max="3" step="0.25" value="1"><strong id="speed-value">1.0×</strong></label>
+            <button id="reset-view" class="control-btn" type="button">↺ <span>Reset view</span></button>
+          </div>
+        </div>
+
+        <aside class="planet-info" aria-live="polite">
+          <div class="info-topline"><span class="info-kicker">PLANET PROFILE</span><span class="planet-index" id="planet-index">03 / 08</span></div>
+          <div class="planet-title-row">
+            <span class="planet-symbol" id="planet-symbol">🌍</span>
+            <div><h3 id="planet-name">Earth</h3><p id="planet-type">Terrestrial planet</p></div>
+          </div>
+          <p class="planet-description" id="planet-description">Our home planet is the only known world with liquid water on its surface and life.</p>
+          <div class="planet-fact" id="planet-fact"><span>✦</span> Earth is about 4.5 billion years old.</div>
+          <div class="stats-grid">
+            <div><span>AVERAGE DISTANCE</span><strong id="planet-distance">149.6 million km</strong></div>
+            <div><span>DIAMETER</span><strong id="planet-diameter">12,742 km</strong></div>
+            <div><span>YEAR LENGTH</span><strong id="planet-year">365 days</strong></div>
+            <div><span>MOONS</span><strong id="planet-moons">1</strong></div>
+          </div>
+          <div class="planet-picker-label">CHOOSE A PLANET</div>
+          <div class="planet-picker" id="planet-picker"></div>
+        </aside>
+      </div>
+      <p class="model-disclaimer">Learning model: planet sizes, distances and orbital speeds are simplified so the whole system can be explored on one screen.</p>
+    </section>
+
+    <section class="planet-cards-section section-wrap" id="planets">
+      <div class="section-heading compact-heading">
+        <div><p class="eyebrow">A CLOSER LOOK</p><h2>Eight worlds, eight stories</h2></div>
+        <p class="section-subtitle side-subtitle">Every planet is unique. Choose one to view its profile in the 3D explorer.</p>
+      </div>
+      <div class="planet-cards" id="planet-cards"></div>
+    </section>
+
+    <section class="quiz-section" id="quiz">
+      <div class="quiz-glow"></div>
+      <div class="quiz-inner section-wrap">
+        <div class="quiz-intro">
+          <p class="eyebrow">MISSION: KNOWLEDGE</p>
+          <h2>Ready for your<br><span>space challenge?</span></h2>
+          <p>Put your astronomy knowledge to the test. Answer five questions and see how much of the universe you've discovered.</p>
+          <div class="quiz-meta"><span>✦ 5 QUESTIONS</span><span>◷ ABOUT 2 MINUTES</span></div>
+        </div>
+        <div class="quiz-card" id="quiz-card">
+          <div class="quiz-progress-row"><span id="quiz-step">QUESTION 1 OF 5</span><span id="quiz-score">SCORE: 0</span></div>
+          <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+          <h3 id="question-text">Which planet is known as the Red Planet?</h3>
+          <div class="answer-list" id="answer-list"></div>
+          <div class="quiz-feedback" id="quiz-feedback" aria-live="polite"></div>
+          <div class="quiz-footer"><span id="quiz-hint">Choose the best answer.</span><button id="next-question" class="primary-btn small-btn" type="button" disabled>Next question →</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="did-you-know section-wrap">
+      <div class="fact-icon">✧</div>
+      <div><p class="eyebrow">A LITTLE SPACE WONDER</p><h2>One day on Venus is longer than its year.</h2><p>Venus rotates so slowly that it takes longer to spin once on its axis than it takes to orbit the Sun.</p></div>
+      <a href="#explore" class="text-link">Explore Venus <span>→</span></a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="brand" href="#home"><span class="brand-mark">✦</span><span>SOLAR<span class="brand-light">EXPLORER</span></span></a>
+    <p>A learning project for curious minds. Keep asking big questions.</p>
+    <span class="footer-small">© <span id="year"></span> Solar Explorer</span>
+  </footer>
+</body>
+</html>
