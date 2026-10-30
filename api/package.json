@@ -1,0 +1,13 @@
+{
+  "name": "solar-explorer-api",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/functions/*.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.7.2",
+    "@azure/data-tables": "^13.3.0"
+  }
+}
