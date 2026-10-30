@@ -1,0 +1,105 @@
+ :root {
+  --bg: #070b18; --panel: #10182b; --panel2: #121d33; --line: rgba(176,196,235,.14);
+  --text: #f4f6ff; --muted: #9ba8c3; --cyan: #73d9ef; --violet: #a99aff;
+  --font: "DM Sans", sans-serif; --display: "Space Grotesk", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+.topbar { height: 76px; padding: 0 max(5vw, calc((100vw - 1280px)/2)); display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); background:rgba(7,11,24,.92); position:sticky; top:0; z-index:20; backdrop-filter:blur(16px); }
+.brand { display:flex; gap:10px; align-items:center; font:700 14px var(--display); letter-spacing:1.7px; }
+.brand-mark { color:var(--cyan); font-size:25px; }
+.brand-light { color:#a8b5d1; font-weight:400; }
+.topbar nav { display:flex; gap:34px; color:#b5bfd5; font-size:13px; }
+.topbar nav a:hover, .text-link:hover { color:var(--cyan); }
+.top-cta { border:1px solid rgba(115,217,239,.4); color:var(--cyan); padding:10px 15px; border-radius:6px; font-size:12px; font-weight:700; }
+.top-cta span { margin-left:12px; }
+.hero { min-height:590px; max-width:1280px; margin:auto; padding:80px 5vw 75px; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:25px; overflow:hidden; }
+.eyebrow { color:var(--cyan); font-size:10px; letter-spacing:2.1px; font-weight:700; margin:0 0 18px; }
+.eyebrow-dot, .live-dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:#69e2bb; box-shadow:0 0 12px #69e2bb; margin-right:8px; }
+h1,h2,h3,p { margin-top:0; }
+h1 { font:600 clamp(46px,6vw,76px)/1.04 var(--display); letter-spacing:-3px; margin-bottom:24px; }
+h1 span:first-of-type { color:var(--cyan); }
+.period { color:var(--violet); }
+.hero-text { color:var(--muted); line-height:1.8; max-width:480px; font-size:15px; }
+.hero-actions { display:flex; align-items:center; gap:26px; margin-top:32px; }
+.primary-btn { display:inline-flex; align-items:center; justify-content:center; gap:24px; border:0; background:linear-gradient(110deg,#72d8ed,#9f9bff); color:#07101d; border-radius:6px; padding:15px 19px; font-size:12px; font-weight:700; cursor:pointer; transition:transform .2s,filter .2s; }
+.primary-btn:hover { transform:translateY(-2px); filter:brightness(1.08); }
+.text-link { color:#d6deef; font-size:12px; font-weight:600; }
+.text-link span { color:var(--cyan); margin-left:7px; }
+.hero-note { margin-top:54px; color:#8290ad; font-size:11px; }
+.note-icon { color:var(--violet); font-size:17px; margin-right:9px; }
+.hero-art { height:410px; position:relative; display:flex; align-items:center; justify-content:center; }
+.hero-orbit { position:absolute; border:1px solid rgba(129,164,225,.18); border-radius:50%; transform:rotate(-22deg); }
+.orbit-one { width:300px;height:300px; }.orbit-two {width:440px;height:230px;}.orbit-three {width:550px;height:330px;}
+.hero-sun { width:115px;height:115px;border-radius:50%; background:radial-gradient(circle at 35% 35%,#fff5bd 0,#ffc66d 28%,#ff884b 62%,#a63c47 100%); box-shadow:0 0 45px #ff9b54,0 0 110px rgba(255,127,65,.42); z-index:2; }
+.hero-planet { position:absolute; border-radius:50%; z-index:3; }
+.planet-blue { width:30px;height:30px;background:radial-gradient(circle at 30% 25%,#b3f4ff,#287bc4 55%,#102d75); top:75px;right:100px;box-shadow:0 0 22px #3789c7; }
+.planet-ring { width:50px;height:50px;background:radial-gradient(circle at 35% 30%,#f5dfa5,#9a784b 70%); bottom:64px;left:82px; }
+.planet-ring:after { content:"";position:absolute;width:83px;height:24px;border:5px solid #d5bc83;border-left-color:#8c785b;border-right-color:#ead5a2;border-radius:50%;left:-22px;top:13px;transform:rotate(-24deg); }
+.planet-red { width:17px;height:17px;background:#d86f56;top:80px;left:100px;box-shadow:0 0 14px #d86f56; }
+.hero-star {position:absolute;color:#a8b8e0;font-size:20px}.star-a{top:28px;left:42%}.star-b{right:7%;bottom:85px}.star-c{left:15%;bottom:35%}
+.hero-caption {position:absolute;bottom:5px;color:#687896;font-size:9px;letter-spacing:2px}.hero-caption span{color:var(--cyan);margin:0 8px}
+.section-wrap { max-width:1280px; margin:auto; padding-left:5vw; padding-right:5vw; }
+.explore-section { padding-top:65px; padding-bottom:48px; }
+.section-heading { display:flex; justify-content:space-between; align-items:end; gap:25px; margin-bottom:26px; }
+h2 { font:600 clamp(27px,3vw,38px)/1.15 var(--display); letter-spacing:-1.1px; margin-bottom:10px; }
+.section-subtitle { color:var(--muted); font-size:12px; line-height:1.7; max-width:610px; margin:0; }
+.model-tag { color:#9eb0cd; font-size:9px; letter-spacing:1.5px; border:1px solid var(--line); border-radius:30px; padding:9px 13px; white-space:nowrap; }
+.explorer-layout { display:grid; grid-template-columns:minmax(0,1.65fr) minmax(290px,.85fr); gap:15px; }
+.space-panel,.planet-info { background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+.solar-scene { height:485px; position:relative; background:radial-gradient(ellipse at 50% 48%,#182848 0%,#0b1428 42%,#080d1b 78%); }
+.solar-scene canvas { display:block; width:100%; height:100%; }
+.scene-loading {position:absolute;inset:0;display:grid;place-items:center;color:#aab8d4;font-size:12px;z-index:1;pointer-events:none}
+.scene-hint {position:absolute;bottom:15px;left:18px;color:#8495b5;font-size:8px;letter-spacing:1.4px;pointer-events:none}.scene-hint span{color:var(--cyan);margin:0 5px}
+.scene-controls { min-height:58px;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-top:1px solid var(--line);gap:12px; }
+.control-btn { border:0;background:transparent;color:#c4cee2;cursor:pointer;font-size:15px;white-space:nowrap; }.control-btn span{font-size:10px;margin-left:5px}
+.speed-control {display:flex;align-items:center;gap:10px;color:#8292b0;font-size:8px;letter-spacing:1px}.speed-control input{width:100px;accent-color:var(--cyan)}.speed-control strong{color:var(--cyan);font-size:10px;min-width:27px}
+.planet-info {padding:23px 22px 18px;background:linear-gradient(145deg,#131e35,#0f1729)}
+.info-topline {display:flex;justify-content:space-between;color:#8292b0;font-size:9px;letter-spacing:1.5px}
+.planet-index {color:var(--cyan)}
+.planet-title-row {display:flex;align-items:center;gap:14px;margin:25px 0 14px}
+.planet-symbol {font-size:35px;width:53px;height:53px;display:grid;place-items:center;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:50%}
+.planet-title-row h3 {font:600 27px var(--display);margin:0 0 3px}.planet-title-row p{color:#8f9db8;font-size:10px;margin:0}
+.planet-description {font-size:12px;color:#aebbd2;line-height:1.7;min-height:62px}
+.planet-fact {font-size:10px;color:#d3c9ff;background:rgba(169,154,255,.09);border:1px solid rgba(169,154,255,.16);border-radius:6px;padding:11px;line-height:1.5;margin:15px 0 18px}.planet-fact span{color:var(--violet);margin-right:6px}
+.stats-grid {display:grid;grid-template-columns:1fr 1fr;gap:15px 10px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats-grid div span {display:block;color:#8292ae;font-size:8px;letter-spacing:1px;margin-bottom:6px}.stats-grid strong{font-size:11px;color:#e6ebf8;font-weight:600}
+.planet-picker-label {font-size:8px;letter-spacing:1.5px;color:#8292ae;margin:17px 0 10px}
+.planet-picker {display:flex;gap:7px;flex-wrap:wrap}
+.planet-pick {width:28px;height:28px;border:1px solid var(--line);border-radius:50%;background:#1a2740;color:#d9e4fa;font-size:10px;cursor:pointer}.planet-pick.active{border-color:var(--cyan);background:rgba(115,217,239,.18);color:var(--cyan);box-shadow:0 0 12px rgba(115,217,239,.15)}
+.model-disclaimer {font-size:9px;color:#687894;margin:12px 2px 0}
+.planet-cards-section {padding-top:70px;padding-bottom:80px}
+.compact-heading {align-items:end}.side-subtitle{max-width:310px}
+.planet-cards {display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.planet-card {background:#10192b;border:1px solid var(--line);border-radius:8px;padding:17px;cursor:pointer;transition:transform .2s,border-color .2s}
+.planet-card:hover {transform:translateY(-3px);border-color:rgba(115,217,239,.5)}
+.card-top {display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.card-emoji{font-size:25px}.card-number{font-size:9px;color:#71819f;letter-spacing:1px}
+.planet-card h3{font:600 17px var(--display);margin:0 0 5px}.planet-card p{font-size:10px;color:#92a0ba;line-height:1.5;margin:0 0 13px;min-height:30px}.card-link{color:var(--cyan);font-size:9px;font-weight:700;letter-spacing:.7px}
+.quiz-section {position:relative;overflow:hidden;background:linear-gradient(110deg,#111c37,#171c3d 55%,#182342);border-top:1px solid rgba(160,174,230,.1);border-bottom:1px solid rgba(160,174,230,.1)}
+.quiz-glow {position:absolute;width:500px;height:500px;border-radius:50%;background:rgba(102,116,218,.12);filter:blur(80px);left:-150px;top:-180px}
+.quiz-inner {position:relative;display:grid;grid-template-columns:.8fr 1.2fr;gap:80px;align-items:center;padding-top:75px;padding-bottom:75px}
+.quiz-intro h2{font-size:42px}.quiz-intro h2 span{color:var(--cyan)}.quiz-intro>p:not(.eyebrow){color:#a5b1ca;font-size:12px;line-height:1.8;max-width:340px}
+.quiz-meta{display:flex;gap:20px;color:#8494b5;font-size:8px;letter-spacing:1px;margin-top:27px}
+.quiz-card{background:rgba(7,13,29,.75);border:1px solid rgba(176,196,235,.17);border-radius:10px;padding:25px 27px;box-shadow:0 20px 60px rgba(0,0,0,.16)}
+.quiz-progress-row{display:flex;justify-content:space-between;color:#8e9cba;font-size:9px;letter-spacing:1.1px}
+.progress-track{height:3px;background:#28334e;border-radius:5px;margin:13px 0 24px;overflow:hidden}.progress-fill{height:100%;width:20%;background:linear-gradient(90deg,var(--cyan),var(--violet));transition:width .3s}
+.quiz-card h3{font:600 20px var(--display);margin-bottom:18px}
+.answer-list{display:grid;gap:9px}
+.answer-option{width:100%;text-align:left;background:#141f37;border:1px solid rgba(176,196,235,.12);border-radius:6px;color:#c7d1e5;padding:12px 14px;font-size:11px;cursor:pointer;transition:border-color .2s,background .2s}
+.answer-option:hover:not(:disabled){border-color:var(--cyan);background:#192943}
+.answer-option.correct{border-color:#54d5a2;background:rgba(84,213,162,.1);color:#a5f2d1}
+.answer-option.incorrect{border-color:#f18b8b;background:rgba(241,139,139,.1);color:#ffc0c0}
+.answer-option:disabled{cursor:default}
+.quiz-feedback{min-height:22px;padding-top:10px;color:#a9b8d2;font-size:10px}
+.quiz-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:15px;margin-top:8px;color:#8291ad;font-size:9px}
+.small-btn{padding:10px 13px;font-size:10px;gap:12px}.small-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.did-you-know{display:flex;align-items:center;gap:25px;padding-top:58px;padding-bottom:58px}
+.fact-icon{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:rgba(169,154,255,.12);color:var(--violet);font-size:25px;flex-shrink:0}
+.did-you-know .eyebrow{margin-bottom:8px}.did-you-know h2{font-size:23px;margin-bottom:7px}.did-you-know p:not(.eyebrow){color:#93a1bc;font-size:11px;margin:0;line-height:1.6}
+.did-you-know .text-link{margin-left:auto;white-space:nowrap}
+.footer{border-top:1px solid var(--line);min-height:85px;padding:20px 5vw;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#7f8eaa}.footer p{font-size:10px;margin:0}.footer-small{font-size:9px}
+@media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:65px}.hero-art{height:340px}.explorer-layout{grid-template-columns:1fr}.planet-info{display:grid;grid-template-columns:1fr 1fr;column-gap:22px}.info-topline,.planet-picker-label,.planet-picker{grid-column:1/-1}.planet-title-row{margin-top:15px}.planet-description{align-self:center}.planet-fact{margin-top:0}.stats-grid{grid-column:1/-1}.quiz-inner{gap:35px}.planet-cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.topbar{height:64px;padding:0 5vw}.topbar nav{display:none}.top-cta{font-size:10px;padding:8px 10px}.hero{padding-top:55px;min-height:auto}.hero-art{height:280px;transform:scale(.85);margin:-5px -35px}.hero-actions{gap:17px;flex-wrap:wrap}.hero-note{margin-top:35px}.section-heading{align-items:flex-start;flex-direction:column}.model-tag{align-self:flex-start}.solar-scene{height:340px}.scene-controls{flex-wrap:wrap}.speed-control{order:3;width:100%;justify-content:center}.planet-info{display:block}.planet-description{min-height:0}.stats-grid{margin-top:15px}.planet-cards{grid-template-columns:1fr 1fr;gap:8px}.planet-card{padding:13px}.quiz-inner{grid-template-columns:1fr;gap:28px;padding-top:55px;padding-bottom:55px}.quiz-intro h2{font-size:35px}.quiz-card{padding:19px 16px}.quiz-card h3{font-size:17px}.quiz-meta{margin-top:18px}.did-you-know{align-items:flex-start;flex-wrap:wrap;gap:15px}.did-you-know>div:nth-child(2){flex:1;min-width:220px}.did-you-know .text-link{margin-left:67px}.footer{flex-wrap:wrap}.footer p{order:3;width:100%}}
