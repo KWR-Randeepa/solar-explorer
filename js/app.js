@@ -186,20 +186,124 @@ function animate() {
 }
 animate();
 
+// Replace the existing quiz code in js/app.js (from `const questions = [`
+// down to the existing `renderQuestion();`) with this block.
 const questions = [
-  { q:"Which planet is known as the Red Planet?", a:["Venus","Mars","Jupiter","Mercury"], correct:1, explain:"Mars looks reddish because iron-rich minerals in its soil have rusted." },
-  { q:"Which planet has the most famous ring system?", a:["Earth","Neptune","Saturn","Mercury"], correct:2, explain:"Saturn's rings are made of countless pieces of ice and rocky material." },
-  { q:"Which is the largest planet in our solar system?", a:["Jupiter","Saturn","Uranus","Earth"], correct:0, explain:"Jupiter is the largest planet by both diameter and mass." },
-  { q:"Which planet is our home?", a:["Venus","Mars","Earth","Neptune"], correct:2, explain:"Earth is our home and the only world currently known to support life." },
-  { q:"Which planet is farthest from the Sun?", a:["Uranus","Saturn","Jupiter","Neptune"], correct:3, explain:"Neptune is the eighth and most distant planet from the Sun." }
+  { q: "Which planet is known as the Red Planet?", a: ["Venus", "Mars", "Jupiter", "Mercury"], correct: 1, explain: "Mars looks reddish because iron-rich minerals in its soil have rusted." },
+  { q: "Which planet has the most famous ring system?", a: ["Earth", "Neptune", "Saturn", "Mercury"], correct: 2, explain: "Saturn's rings are made of countless pieces of ice and rocky material." },
+  { q: "Which is the largest planet in our solar system?", a: ["Jupiter", "Saturn", "Uranus", "Earth"], correct: 0, explain: "Jupiter is the largest planet by both diameter and mass." },
+  { q: "Which planet is our home?", a: ["Venus", "Mars", "Earth", "Neptune"], correct: 2, explain: "Earth is our home and the only world currently known to support life." },
+  { q: "Which planet is farthest from the Sun?", a: ["Uranus", "Saturn", "Jupiter", "Neptune"], correct: 3, explain: "Neptune is the eighth and most distant planet from the Sun." }
 ];
 let questionIndex = 0;
 let score = 0;
 let answered = false;
+let completed = false;
 const questionText = document.querySelector("#question-text");
 const answerList = document.querySelector("#answer-list");
 const feedback = document.querySelector("#quiz-feedback");
 const nextButton = document.querySelector("#next-question");
+
+function renderQuestion() {
+  const q = questions[questionIndex];
+  answered = false;
+  completed = false;
+  document.querySelector("#quiz-step").textContent = `QUESTION ${questionIndex + 1} OF ${questions.length}`;
+  document.querySelector("#quiz-score").textContent = `SCORE: ${score}`;
+  document.querySelector("#progress-fill").style.width = `${(questionIndex / questions.length) * 100}%`;
+  questionText.textContent = q.q;
+  feedback.textContent = "";
+  feedback.style.color = "";
+  document.querySelector("#quiz-hint").textContent = "Choose the best answer.";
+  nextButton.disabled = true;
+  nextButton.textContent = questionIndex === questions.length - 1 ? "Finish mission →" : "Next question →";
+  answerList.innerHTML = "";
+  q.a.forEach((answer, i) => {
+    const button = document.createElement("button");
+    button.className = "answer-option";
+    button.type = "button";
+    button.textContent = `${String.fromCharCode(65 + i)}.  ${answer}`;
+    button.addEventListener("click", () => chooseAnswer(i));
+    answerList.appendChild(button);
+  });
+}
+
+function chooseAnswer(index) {
+  if (answered || completed) return;
+  answered = true;
+  const q = questions[questionIndex];
+  [...answerList.children].forEach((button, i) => {
+    button.disabled = true;
+    if (i === q.correct) button.classList.add("correct");
+    else if (i === index) button.classList.add("incorrect");
+  });
+  if (index === q.correct) {
+    score++;
+    feedback.textContent = `Correct! ${q.explain}`;
+    feedback.style.color = "#8de3bb";
+  } else {
+    feedback.textContent = `Not quite. ${q.explain}`;
+    feedback.style.color = "#ffc0c0";
+  }
+  document.querySelector("#quiz-score").textContent = `SCORE: ${score}`;
+  document.querySelector("#quiz-hint").textContent = "Answer recorded.";
+  nextButton.disabled = false;
+}
+
+async function saveQuizResult() {
+  feedback.textContent = "Mission complete! Saving your anonymous score to Azure…";
+  feedback.style.color = "#a9c7ff";
+  try {
+    const response = await fetch("/api/quiz-result", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ score, totalQuestions: questions.length })
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || "The API returned an error.");
+    feedback.textContent = `Score saved in Azure Storage: ${score}/${questions.length}. ${result.message}`;
+    feedback.style.color = "#8de3bb";
+  } catch (error) {
+    feedback.textContent = `Quiz complete: ${score}/${questions.length}. The score could not be saved yet. Check the Azure API deployment and storage settings, then try again.`;
+    feedback.style.color = "#ffd18a";
+    console.error("Quiz result submission failed:", error);
+  } finally {
+    nextButton.disabled = false;
+    nextButton.textContent = "Try again ↻";
+    document.querySelector("#quiz-hint").textContent = "Your score is not linked to a personal identity.";
+  }
+}
+
+function finishQuiz() {
+  completed = true;
+  questionText.textContent = `Mission complete! You scored ${score} out of ${questions.length}.`;
+  answerList.innerHTML = "";
+  document.querySelector("#quiz-step").textContent = "MISSION COMPLETE";
+  document.querySelector("#progress-fill").style.width = "100%";
+  nextButton.disabled = true;
+  nextButton.textContent = "Saving result…";
+  saveQuizResult();
+}
+
+function resetQuiz() {
+  questionIndex = 0;
+  score = 0;
+  renderQuestion();
+}
+
+nextButton.addEventListener("click", () => {
+  if (completed) return resetQuiz();
+  if (!answered) return;
+  if (questionIndex < questions.length - 1) {
+    questionIndex++;
+    renderQuestion();
+  } else {
+    finishQuiz();
+  }
+});
+
+renderQuestion();
+
 
 function renderQuestion() {
   const q = questions[questionIndex];
